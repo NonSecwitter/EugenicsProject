@@ -1,19 +1,23 @@
 #ifndef INDIVIDUAL_H
 #define INDIVIDUAL_H
 
-#include ".\FitnessCalc.h"
+
 #include <string>
+
+typedef unsigned char byte;
 
 class Individual
 {
 public:
-	static const int  DEFAULT_GENE_LENGTH = 64;
+	Individual();
+
+	static int  DEFAULT_GENE_LENGTH;
 	static void setDefaultGeneLength(int length);
 
 	void generateIndividual();
 	
-	void		 setGene();
-	unsigned int getGene(int index);
+	void setGene(int index, byte value);
+	byte getGene(int index);
 
 	int size();
 
@@ -23,8 +27,7 @@ public:
 
 private:
 
-	unsigned int genes[DEFAULT_GENE_LENGTH];
-
+	byte *genes;
 
 	int fitness;
 

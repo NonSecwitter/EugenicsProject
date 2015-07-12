@@ -7,6 +7,7 @@ class Population
 {
 public:
 	Individual* individuals;
+	int numIndividuals;
 
 	Population(int populationSize, bool initialize);
 

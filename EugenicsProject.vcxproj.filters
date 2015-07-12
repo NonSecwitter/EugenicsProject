@@ -7,10 +7,10 @@
     <ClInclude Include="inc\Population.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\EugenicsProject.cpp" />
     <ClCompile Include="src\Population.cpp" />
     <ClCompile Include="src\Individual.cpp" />
     <ClCompile Include="src\FitnessCalc.cpp" />
     <ClCompile Include="src\Algorithm.cpp" />
+    <ClCompile Include="EugenicsProject.cpp" />
   </ItemGroup>
 </Project>

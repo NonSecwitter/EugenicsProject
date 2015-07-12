@@ -71,7 +71,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Algorithm.cpp" />
-    <ClCompile Include="src\EugenicsProject.cpp" />
+    <ClCompile Include="EugenicsProject.cpp" />
     <ClCompile Include="src\FitnessCalc.cpp" />
     <ClCompile Include="src\Individual.cpp" />
     <ClCompile Include="src\Population.cpp" />
