@@ -1,6 +1,7 @@
 #ifndef FITNESSCALC_H
 #define FITNESSCALC_H
 
+#include ".\Individual.h"
 #include <string>
 
 typedef unsigned char byte;
@@ -8,13 +9,14 @@ typedef unsigned char byte;
 class FitnessCalc
 {
 public:
-	static void setSolution(byte *newSolution);
+	static void setSolution(byte *newSolution, int newSolutionLength);
 	static void setSolution(std::string newSolution);
-	static int  getFitness(Individual *indiv);
+	static int  getFitness(Individual &indiv);
 	static int  getMaxFitness();
 
 private:
-	byte solution[64];
+	static byte *solution;
+	static int solutionLength;
 
 
 

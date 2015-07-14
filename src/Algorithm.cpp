@@ -51,7 +51,7 @@ Individual Algorithm::crossOver(Individual indiv1, Individual indiv2)
 
 	for (int i = 0; i < indiv1.size(); i++)
 	{
-		if (((randomGenerator() % 100) / 100) <= UNIFORM_RATE)
+		if (((randomGenerator() % 101) / 100) <= UNIFORM_RATE)
 		{
 			newSol.setGene(i, indiv1.getGene(i));
 		}
@@ -62,7 +62,30 @@ Individual Algorithm::crossOver(Individual indiv1, Individual indiv2)
 	}
 }
 
+void Algorithm::mutate(Individual indiv)
+{
+	for (int i = 0; i < indiv.size(); i++)
+	{
+		if (((randomGenerator() % 101) / 100) <= MUTATION_RATE)
+		{
+			byte gene = randomGenerator() % 256;
+			indiv.setGene(i, gene);
+		}
+	}
+}
 
+Individual Algorithm::tournamentSelection(Population pop)
+{
+	Population tournament(TOURNAMENT_SIZE, false);
+
+	for (int i = 0; i < TOURNAMENT_SIZE; i++)
+	{
+		int randomID = randomGenerator() % pop.size();
+		tournament.saveIndividual(i, pop.getIndividual(randomID));
+	}
+	Individual fittest = tournament.getFittest();
+	return fittest;
+}
 
 
 
