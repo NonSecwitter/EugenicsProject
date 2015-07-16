@@ -2,8 +2,7 @@
 #include <random>
 #include <chrono>
 
-unsigned int seed = std::chrono::system_clock::now().time_since_epoch().count();
-std::default_random_engine randomGenerator(seed);
+
 
 const double Algorithm::UNIFORM_RATE = 0.5;
 const double Algorithm::MUTATION_RATE = 0.015;
@@ -47,6 +46,9 @@ Population Algorithm::evolvePopulation(Population pop)
 
 Individual Algorithm::crossOver(Individual indiv1, Individual indiv2)
 {
+	unsigned int seed = std::chrono::system_clock::now().time_since_epoch().count();
+	std::default_random_engine randomGenerator(seed);
+
 	Individual newSol;
 
 	for (int i = 0; i < indiv1.size(); i++)
@@ -60,10 +62,14 @@ Individual Algorithm::crossOver(Individual indiv1, Individual indiv2)
 			newSol.setGene(i, indiv2.getGene(i));
 		}
 	}
+	return newSol;
 }
 
 void Algorithm::mutate(Individual indiv)
 {
+	unsigned int seed = std::chrono::system_clock::now().time_since_epoch().count();
+	std::default_random_engine randomGenerator(seed);
+
 	for (int i = 0; i < indiv.size(); i++)
 	{
 		if (((randomGenerator() % 101) / 100) <= MUTATION_RATE)
@@ -76,6 +82,9 @@ void Algorithm::mutate(Individual indiv)
 
 Individual Algorithm::tournamentSelection(Population pop)
 {
+	unsigned int seed = std::chrono::system_clock::now().time_since_epoch().count();
+	std::default_random_engine randomGenerator(seed);
+
 	Population tournament(TOURNAMENT_SIZE, false);
 
 	for (int i = 0; i < TOURNAMENT_SIZE; i++)
@@ -86,13 +95,4 @@ Individual Algorithm::tournamentSelection(Population pop)
 	Individual fittest = tournament.getFittest();
 	return fittest;
 }
-
-
-
-
-
-
-
-
-
 

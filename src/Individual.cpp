@@ -3,13 +3,10 @@
 #include <chrono>
 #include <random>
 
-unsigned int seed = std::chrono::system_clock::now().time_since_epoch().count();
-std::default_random_engine randomGenerator(seed);
+int Individual::DEFAULT_GENE_LENGTH = 64;
 
 Individual::Individual()
 {
-	DEFAULT_GENE_LENGTH = 64;
-
 	genes = new byte[DEFAULT_GENE_LENGTH];
 
 	fitness = 0;
@@ -17,6 +14,9 @@ Individual::Individual()
 
 void Individual::generateIndividual()
 {
+	unsigned int seed = std::chrono::system_clock::now().time_since_epoch().count();
+	std::default_random_engine randomGenerator(seed);
+
 	for (int i = 0; i < size(); i++)
 	{
 		byte gene = randomGenerator() % 256;
@@ -47,9 +47,10 @@ int Individual::size()
 
 int Individual::getFitness()
 {
+	
 	if (fitness == 0)
 	{
-		fitness = FitnessCalc::getFitness(this);
+		fitness = FitnessCalc::getFitness(*this);
 	}
 	return fitness;
 }
@@ -62,7 +63,11 @@ std::string Individual::toString()
 	{
 		geneString += (char)getGene(i);
 	}
+	return geneString;
 }
 
-
+Individual::~Individual()
+{
+	//delete [] genes;
+}
 

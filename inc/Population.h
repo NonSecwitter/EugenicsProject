@@ -6,10 +6,11 @@
 class Population
 {
 public:
-	Individual* individuals;
+	Individual *individuals;
 	int numIndividuals;
 
 	Population(int populationSize, bool initialize);
+	~Population();
 
 	Individual getIndividual(int index);
 	Individual getFittest();

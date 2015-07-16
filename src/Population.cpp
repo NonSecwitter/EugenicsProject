@@ -32,6 +32,7 @@ Individual Population::getFittest()
 			fittest = getIndividual(i);
 		}
 	}
+	return fittest;
 }
 
 int Population::size()
@@ -42,4 +43,9 @@ int Population::size()
 void Population::saveIndividual(int index, Individual indiv)
 {
 	individuals[index] = indiv;
+}
+
+Population::~Population()
+{
+	delete[] individuals;
 }

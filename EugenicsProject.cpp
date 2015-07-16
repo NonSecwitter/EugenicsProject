@@ -14,8 +14,8 @@ int main()
 	while (myPop.getFittest().getFitness() < FitnessCalc::getMaxFitness())
 	{
 		generationCount++;
-		std::cout << "Generation: " << generationCount << std::endl
-				  << "Fittest: " << myPop.getFittest().getFitness();
+		std::cout << "Generation: " << generationCount << '\t'
+				  << "Fitness Level: " << myPop.getFittest().getFitness() << std::endl;
 		myPop = Algorithm::evolvePopulation(myPop);
 	}
 
@@ -23,6 +23,6 @@ int main()
 		<< "Generation: " << generationCount << std::endl
 		<< "Genes: " << myPop.getFittest().toString();
 
-
+	std::cin.get();
 	return 0;
 }

@@ -10,7 +10,7 @@ class Individual
 {
 public:
 	Individual();
-
+	~Individual();
 	static int  DEFAULT_GENE_LENGTH;
 	static void setDefaultGeneLength(int length);
 
