@@ -7,7 +7,7 @@
 class Algorithm
 {
 public:
-	static Population evolvePopulation(Population pop);
+	static Population evolvePopulation(Population &pop);
 
 private:
 	static const double UNIFORM_RATE;

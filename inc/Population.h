@@ -6,11 +6,16 @@
 class Population
 {
 public:
-	Individual *individuals;
-	int numIndividuals;
+
 
 	Population(int populationSize, bool initialize);
 	~Population();
+	Population(const Population &other);
+
+	Population& operator=(const Population &rhs);
+
+	Individual *individuals;
+	int numIndividuals;
 
 	Individual getIndividual(int index);
 	Individual getFittest();

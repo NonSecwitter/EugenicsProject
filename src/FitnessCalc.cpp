@@ -3,12 +3,6 @@
 byte *FitnessCalc::solution = new byte{ '\0' };
 int FitnessCalc::solutionLength = 0;
 
-FitnessCalc::FitnessCalc()
-{
-	solution = new byte{ '\0' };
-	solutionLength = 0;
-}
-
 void FitnessCalc::setSolution(byte *newSolution, int newSolutionLength)
 {
 	solution = new byte[newSolutionLength];
@@ -22,10 +16,10 @@ void FitnessCalc::setSolution(byte *newSolution, int newSolutionLength)
 
 void FitnessCalc::setSolution(std::string newSolution)
 {
-	solution = new byte[newSolution.length()];
 	solutionLength = newSolution.length();
+	solution = new byte[solutionLength];
 
-	for (int i = 0; i < newSolution.length(); i++)
+	for (int i = 0; i < solutionLength; i++)
 	{
 		solution[i] = newSolution[i];
 	}

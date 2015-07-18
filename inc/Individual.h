@@ -11,6 +11,8 @@ class Individual
 public:
 	Individual();
 	~Individual();
+	Individual(const Individual &other);
+
 	static int  DEFAULT_GENE_LENGTH;
 	static void setDefaultGeneLength(int length);
 
@@ -21,9 +23,13 @@ public:
 
 	int size();
 
+	Individual& operator=(const Individual &rhs);
+
 	int getFitness();
 
 	std::string toString();
+
+
 
 private:
 

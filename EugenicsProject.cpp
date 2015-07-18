@@ -5,11 +5,15 @@
 
 int main()
 {
-	FitnessCalc::setSolution("Hello World");
+	FitnessCalc::setSolution("hello");
 
 	Population myPop(50, true);
 
+	for (int i = 0; i < myPop.size(); i++)
+		std::cout << "Recalled " << i << ": " << myPop.getIndividual(i).toString() << std::endl;
+
 	int generationCount = 0;
+
 
 	while (myPop.getFittest().getFitness() < FitnessCalc::getMaxFitness())
 	{

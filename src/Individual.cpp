@@ -3,7 +3,7 @@
 #include <chrono>
 #include <random>
 
-int Individual::DEFAULT_GENE_LENGTH = 11;
+int Individual::DEFAULT_GENE_LENGTH = 5;
 
 Individual::Individual()
 {
@@ -14,12 +14,12 @@ Individual::Individual()
 
 void Individual::generateIndividual()
 {
-	unsigned int seed = std::chrono::system_clock::now().time_since_epoch().count();
-	std::default_random_engine randomGenerator(seed);
+	
+	std::random_device randomGenerator;
 
 	for (int i = 0; i < size(); i++)
 	{
-		byte gene = randomGenerator() % 58 + 65;
+		byte gene = randomGenerator() % 26 + 97;
 		genes[i] = gene;
 	}
 }
@@ -68,6 +68,31 @@ std::string Individual::toString()
 
 Individual::~Individual()
 {
-	//delete [] genes;
+	delete [] genes;
 }
 
+Individual::Individual(const Individual &other)
+{
+	fitness = other.fitness;
+
+	genes = new byte[DEFAULT_GENE_LENGTH];
+
+	for (int i = 0; i < size(); i++)
+	{
+		genes[i] = other.genes[i];
+	}
+}
+
+Individual& Individual::operator=(const Individual &rhs)
+{
+	fitness = rhs.fitness;
+
+	genes = new byte[DEFAULT_GENE_LENGTH];
+
+	for (int i = 0; i < size(); i++)
+	{
+		genes[i] = rhs.genes[i];
+	}
+
+	return *this;
+}

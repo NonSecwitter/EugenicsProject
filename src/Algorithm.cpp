@@ -2,14 +2,12 @@
 #include <random>
 #include <chrono>
 
-
-
 const double Algorithm::UNIFORM_RATE = 0.5;
 const double Algorithm::MUTATION_RATE = 0.015;
 const int	 Algorithm::TOURNAMENT_SIZE = 5;
 const bool	 Algorithm::ELITISM = true;
 
-Population Algorithm::evolvePopulation(Population pop)
+Population Algorithm::evolvePopulation(Population &pop)
 {
 	Population newPopulation(pop.size(), false);
 
@@ -46,14 +44,18 @@ Population Algorithm::evolvePopulation(Population pop)
 
 Individual Algorithm::crossOver(Individual &indiv1, Individual &indiv2)
 {
-	unsigned int seed = std::chrono::system_clock::now().time_since_epoch().count();
-	std::default_random_engine randomGenerator(seed);
+	
+	std::random_device randomGenerator;
+	double chanceToParent;
 
 	Individual newSol;
 
 	for (int i = 0; i < indiv1.size(); i++)
 	{
-		if (((randomGenerator() % 101) / 100) <= UNIFORM_RATE)
+		chanceToParent = randomGenerator() % 100;
+		chanceToParent /= 100;
+
+		if (chanceToParent <= UNIFORM_RATE)
 		{
 			newSol.setGene(i, indiv1.getGene(i));
 		}
@@ -67,14 +69,14 @@ Individual Algorithm::crossOver(Individual &indiv1, Individual &indiv2)
 
 void Algorithm::mutate(Individual &indiv)
 {
-	unsigned int seed = std::chrono::system_clock::now().time_since_epoch().count();
-	std::default_random_engine randomGenerator(seed);
+	
+	std::random_device randomGenerator;
 
 	for (int i = 0; i < indiv.size(); i++)
 	{
 		if (((randomGenerator() % 101) / 100) <= MUTATION_RATE)
 		{
-			byte gene = randomGenerator() % 58 + 65;
+			byte gene = randomGenerator() % 26 + 97;
 			indiv.setGene(i, gene);
 		}
 	}
@@ -82,15 +84,17 @@ void Algorithm::mutate(Individual &indiv)
 
 Individual Algorithm::tournamentSelection(Population &pop)
 {
-	unsigned int seed = std::chrono::system_clock::now().time_since_epoch().count();
-	std::default_random_engine randomGenerator(seed);
+	
+	std::random_device randomGenerator;
+	Individual selectedIndiv;
 
 	Population tournament(TOURNAMENT_SIZE, false);
 
 	for (int i = 0; i < TOURNAMENT_SIZE; i++)
 	{
 		int randomID = randomGenerator() % pop.size();
-		tournament.saveIndividual(i, pop.getIndividual(randomID));
+		selectedIndiv = pop.getIndividual(randomID);
+		tournament.saveIndividual(i, selectedIndiv);
 	}
 	Individual fittest = tournament.getFittest();
 	return fittest;

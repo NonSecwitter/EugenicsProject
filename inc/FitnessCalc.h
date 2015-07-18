@@ -9,7 +9,6 @@ typedef unsigned char byte;
 class FitnessCalc
 {
 public:
-	FitnessCalc();
 	static void setSolution(byte *newSolution, int newSolutionLength);
 	static void setSolution(std::string newSolution);
 	static int  getFitness(Individual &indiv);

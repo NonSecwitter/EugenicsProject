@@ -1,4 +1,5 @@
 #include "..\inc\Population.h"
+#include <iostream>
 
 Population::Population(int populationSize, bool initialize)
 {
@@ -12,22 +13,32 @@ Population::Population(int populationSize, bool initialize)
 			Individual newIndividual;
 			newIndividual.generateIndividual();
 			saveIndividual(i, newIndividual);
+			std::cout << "New " << i << ": " << newIndividual.toString() << std::endl;
+			std::cout << "Saved " << i << ": " << getIndividual(i).toString() << std::endl;
 		}
 	}
 }
 
 Individual Population::getIndividual(int index)
 {
-	return individuals[index];
+	Individual gottenIndiv = individuals[index];
+	return gottenIndiv;
 }
 
 Individual Population::getFittest()
 {
 	Individual fittest = individuals[0];
+	int fittestFitness = fittest.getFitness();
 
-	for (int i = 0; i < size(); i++)
+	Individual competitor;
+	int competitorFitness = 0;
+
+	for (int i = 1; i < size(); i++)
 	{
-		if (fittest.getFitness() <= getIndividual(i).getFitness())
+		competitor = getIndividual(i);
+		competitorFitness = competitor.getFitness();
+
+		if (fittestFitness <= getIndividual(i).getFitness())
 		{
 			fittest = getIndividual(i);
 		}
@@ -47,6 +58,29 @@ void Population::saveIndividual(int index, Individual indiv)
 
 Population::~Population()
 {
-	//NEED TO WRITE COPY CONSTRUCTOR WITH DEEP COPY OF GENES AND INDIVIDUALS TO ACCOMPLISH THIS.
-	//delete[] individuals;
+	delete[] individuals;
+}
+
+Population::Population(const Population &other)
+{
+	numIndividuals = other.numIndividuals;
+	individuals = new Individual[numIndividuals];
+
+	for (int i = 0; i < size(); i++)
+	{
+		individuals[i] = other.individuals[i];
+	}
+}
+
+Population& Population::operator=(const Population &rhs)
+{
+	numIndividuals = rhs.numIndividuals;
+	individuals = new Individual[numIndividuals];
+
+	for (int i = 0; i < size(); i++)
+	{
+		individuals[i] = rhs.individuals[i];
+	}
+
+	return *this;
 }
