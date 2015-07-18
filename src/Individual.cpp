@@ -3,7 +3,7 @@
 #include <chrono>
 #include <random>
 
-int Individual::DEFAULT_GENE_LENGTH = 64;
+int Individual::DEFAULT_GENE_LENGTH = 11;
 
 Individual::Individual()
 {
@@ -19,7 +19,7 @@ void Individual::generateIndividual()
 
 	for (int i = 0; i < size(); i++)
 	{
-		byte gene = randomGenerator() % 256;
+		byte gene = randomGenerator() % 58 + 65;
 		genes[i] = gene;
 	}
 }

@@ -47,5 +47,6 @@ void Population::saveIndividual(int index, Individual indiv)
 
 Population::~Population()
 {
-	delete[] individuals;
+	//NEED TO WRITE COPY CONSTRUCTOR WITH DEEP COPY OF GENES AND INDIVIDUALS TO ACCOMPLISH THIS.
+	//delete[] individuals;
 }

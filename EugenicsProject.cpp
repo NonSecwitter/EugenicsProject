@@ -15,7 +15,7 @@ int main()
 	{
 		generationCount++;
 		std::cout << "Generation: " << generationCount << '\t'
-				  << "Fitness Level: " << myPop.getFittest().getFitness() << std::endl;
+				  << "Fitness Level: " << myPop.getFittest().toString() << std::endl;
 		myPop = Algorithm::evolvePopulation(myPop);
 	}
 

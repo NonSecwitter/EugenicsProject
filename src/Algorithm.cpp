@@ -44,7 +44,7 @@ Population Algorithm::evolvePopulation(Population pop)
 	return newPopulation;
 }
 
-Individual Algorithm::crossOver(Individual indiv1, Individual indiv2)
+Individual Algorithm::crossOver(Individual &indiv1, Individual &indiv2)
 {
 	unsigned int seed = std::chrono::system_clock::now().time_since_epoch().count();
 	std::default_random_engine randomGenerator(seed);
@@ -65,7 +65,7 @@ Individual Algorithm::crossOver(Individual indiv1, Individual indiv2)
 	return newSol;
 }
 
-void Algorithm::mutate(Individual indiv)
+void Algorithm::mutate(Individual &indiv)
 {
 	unsigned int seed = std::chrono::system_clock::now().time_since_epoch().count();
 	std::default_random_engine randomGenerator(seed);
@@ -74,13 +74,13 @@ void Algorithm::mutate(Individual indiv)
 	{
 		if (((randomGenerator() % 101) / 100) <= MUTATION_RATE)
 		{
-			byte gene = randomGenerator() % 256;
+			byte gene = randomGenerator() % 58 + 65;
 			indiv.setGene(i, gene);
 		}
 	}
 }
 
-Individual Algorithm::tournamentSelection(Population pop)
+Individual Algorithm::tournamentSelection(Population &pop)
 {
 	unsigned int seed = std::chrono::system_clock::now().time_since_epoch().count();
 	std::default_random_engine randomGenerator(seed);
